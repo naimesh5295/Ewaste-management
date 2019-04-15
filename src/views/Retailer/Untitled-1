@@ -1,0 +1,123 @@
+
+{
+  "$class": "org.example.mynetwork.Product",
+  "productID": "5708",
+  "productName": "",
+  "EstimatedProductPrice": 0,
+  "isCompleted": false,
+  "shipmentStatus": "CREATED",
+  "customer": "resource:org.example.mynetwork.Customer#5006",
+  "logistics": "resource:org.example.mynetwork.Logistics#5282",
+  "trucker": "resource:org.example.mynetwork.Trucker#0041",
+  "retailStore": "resource:org.example.mynetwork.RetailStore#9540",
+  "company": "resource:org.example.mynetwork.Company#9500",
+  "wasteTreatment": "DISPOSAL",
+  "estimatedRewardPrice": 0,
+  "clearanceDateTime": "2019-04-10T06:37:50.902Z",
+  "arrivalDate": "2019-04-10T06:37:50.902Z",
+  "wasteType": "EWASTE"
+}
+
+
+
+
+this.handletrucker=this.handletrucker.bind(this);
+    this.handleretailStore=this.handleretailStore.bind(this);
+    this.handlecompany=this.handlecompany.bind(this);
+    this.handlewasteTreatment=this.handlewasteTreatment.bind(this);
+    this.handleestimatedRewardPrice=this.handleestimatedRewardPrice.bind(this);
+    this.handleclearanceDateTime=this.handleclearanceDateTime.bind(this);
+    this.handlearrivalDate=this.handlearrivalDate.bind(this);
+    this.handlewasteType=this.handlewasteType.bind(this);
+    this.handlehandleshipmentStatus=this.handlehandleshipmentStatus.bind(this);
+
+     <FormGroup>
+                  <InputGroup className="input-group-alternative mb-3">
+                    <InputGroupAddon addonType="prepend">
+                      <InputGroupText>
+                        <i className="ni ni-hat-3" />
+                      </InputGroupText>
+                    </InputGroupAddon>
+
+                    <Input
+                      placeholder="Shipment Status"
+                      type="text"
+                      value={this.state.shipmentStatus}
+                      onChange={e => this.handleshipmentStatus(e)}
+                    />
+                  </InputGroup>
+                </FormGroup>
+
+
+
+
+
+
+
+
+                 <h4>Centered Modal</h4>
+          <Card>
+            <CardBody className="px-lg-5 py-lg-5">
+              <Form role="form" onSubmit={e => this.handleSubmit(e)}>
+              <FormGroup>
+                  <InputGroup className="input-group-alternative mb-3">
+                    <InputGroupAddon addonType="prepend">
+                      <InputGroupText>
+                        <i className="ni ni-hat-3" />
+                      </InputGroupText>
+                    </InputGroupAddon>
+
+                    <Input
+                      placeholder="Product ID"
+                      type="text"
+                      value={this.state.productId||0}
+                      onChange={e => this.handleid(e)}
+                    />
+                  </InputGroup>
+                </FormGroup>
+                <FormGroup>
+                  <InputGroup className="input-group-alternative mb-3">
+                    <InputGroupAddon addonType="prepend">
+                      <InputGroupText>
+                        <i className="ni ni-hat-3" />
+                      </InputGroupText>
+                    </InputGroupAddon>
+
+                    <Input
+                      placeholder="Product Name"
+                      type="text"
+                      value={this.state.productName||''}
+                      onChange={e => this.handleName(e)}
+                    />
+                  </InputGroup>
+                </FormGroup>
+                <FormGroup>
+                  <InputGroup className="input-group-alternative mb-3">
+                    <InputGroupAddon addonType="prepend">
+                      <InputGroupText>
+                        <i className="ni ni-hat-3" />
+                      </InputGroupText>
+                    </InputGroupAddon>
+
+                    <Input
+                      placeholder="Product Estimated Price"
+                      type="number"
+                      value={this.state.productPrice}
+                      onChange={e => this.handleprice(e)}
+                    />
+                  </InputGroup>
+                </FormGroup>
+            
+                <FormGroup>
+                  <InputGroup className="input-group-alternative mb-3">
+                    <InputGroupAddon addonType="prepend">
+                      <InputGroupText>
+                        <i className="ni ni-hat-3" />
+                      </InputGroupText>
+                    </InputGroupAddon>
+                    <Input type="Submit" placeholder="Submit" onClick={e=> this.submitForm(e)}/>
+                  </InputGroup>
+                </FormGroup>
+              </Form>
+            </CardBody>
+          </Card>
