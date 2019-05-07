@@ -5,14 +5,14 @@ import { withRouter,Route } from "react-router-dom";
 
 
 
-class Issue extends React.Component {
+class ImportToWallet extends React.Component {
     
     render(){
         return(
-            window.location.href="http://localhost:3001/"
+            window.location.href="http://localhost:3000/"
         )
     }
 
     
   }
-export default Issue
+export default ImportToWallet

@@ -37,6 +37,7 @@ class LogisticAddTrucker extends React.Component {
       country: "",
       pincode: 0,
       logisticsid: localStorage.getItem("user_id")
+   
     };
     this.handleaddtrucker = this.handleaddtrucker.bind(this);
     this.handlelogisticsid = this.handlelogisticsid.bind(this);
@@ -53,11 +54,13 @@ class LogisticAddTrucker extends React.Component {
     this.handleSubmitForm = this.handleSubmitForm.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
+
   handlelogisticsid(event) {
     this.setState({
       logisticsid: event.target.value
     });
   }
+ 
   handlepersonID(event) {
     this.setState({
       personID: event.target.value
@@ -106,7 +109,7 @@ class LogisticAddTrucker extends React.Component {
   handleSubmitForm(event) {
     event.preventDefault();
   }
-
+  
   handleSubmit() {
     console.log(this.state);
     axios
@@ -152,7 +155,7 @@ class LogisticAddTrucker extends React.Component {
             <Card className="bg-secondary shadow border-0">
               <CardHeader className="bg-transparent pb-5">
                 <div className="text-center text-muted mb-4">
-                  <large> Add truck</large>
+                  <h1> Add trucker</h1>
                 </div>
               </CardHeader>
               <CardBody className="px-lg-5 py-lg-5">
@@ -216,7 +219,7 @@ class LogisticAddTrucker extends React.Component {
                       </InputGroupAddon>
                       <Input
                         placeholder=""
-                        type="text"
+                        type="password"
                         value={this.state.personPasswd}
                         onChange={e => this.handlepersonPasswd(e)}
                       />

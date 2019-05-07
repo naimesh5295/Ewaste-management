@@ -12,7 +12,7 @@ import {
   ButtonToolbar
 } from "reactstrap";
 // core components
-import LogisticHeader from "components/Headers/LogisticHeader.jsx";
+import Header from "components/Headers/Header.jsx";
 
 class LogisticAdmin extends React.Component {
   constructor() {
@@ -93,7 +93,7 @@ class LogisticAdmin extends React.Component {
   render() {
     return (
       <>
-        <LogisticHeader />
+        <Header />
         {/* Page content */}
         <Container className="mt--7" fluid>
           {/* Table */}

@@ -29,7 +29,7 @@ class Login extends React.Component {
       id: "",
       adminurl: "",
       accesstoken:
-        "s%3AG8P3UAWfGCeBvi8BKc9CS80uUt7Z8o2uu2LqVF5XEMEoAdeBlQLYmJV6gSDYjaHd.dzDNamgy%2BAB0kPBOkFReD5DjP9a2n8VpiVp%2BELsNoxU"
+        "yyOEzRlWaLf4QJVMcc9KrQPhh8U7Wh7t7DQAgm3xAnJhovQpj3GJUaCdAAgfwy4L"
       // Token: this.getcookie('access_token')
     };
 
@@ -76,16 +76,16 @@ class Login extends React.Component {
           businessPasswd: this.state.password
         })
         .then(res => {
-          console.log(res);
-          window.location.href = "http://localhost:3002/company/index";
+          console.log("response:",res);
+          window.location.href = "http://localhost:3003/company/index";
         });
-    } else if (check == "Ret") {
+    } else if (check == "ret") {
       console.log(check);
 
-      axios.post("http://localhost:3001/api/org.example.mynetwork.LoginRetailStore",{
-            $class: "org.example.mynetwork.RetailStore",
+      axios.post("http://localhost:3001/api/org.example.mynetwork.LoginRetailStore" ,{
+            $class: "org.example.mynetwork.LoginRetailStore",
             retailStore:
-              "resource:org.example.mynetwork.RetailStore#" + (this.state.id).toString(),
+              "resource:org.example.mynetwork.RetailStore#" + (this.state.id),
             businessEmail: this.state.username,
             businessPasswd: this.state.password
           }
@@ -93,7 +93,7 @@ class Login extends React.Component {
         .then(res => {
           console.log(res);
           console.log(check);
-          window.location.href = "http://localhost:3002/retailer/index";
+          window.location.href = "http://localhost:3003/retailer/index";
         });
     } else if (check == "log") {
       console.log(check);
@@ -112,7 +112,7 @@ class Login extends React.Component {
         .then(res => {
           console.log(res);
           console.log(check);
-          window.location.href = "http://localhost:3002/logistic/index";
+          window.location.href = "http://localhost:3003/logistic/index";
         });
     }
   }
@@ -124,7 +124,7 @@ class Login extends React.Component {
           <Card className="bg-secondary shadow border-0">
             <CardBody className="px-lg-5 py-lg-5">
               <div className="text-center text-muted mb-4">
-                <small>Or sign in with credentials</small>
+                <h1>Sign in</h1>
               </div>
               <Form role="form">
                 <FormGroup className="mb-3">
@@ -172,26 +172,9 @@ class Login extends React.Component {
                     />
                   </InputGroup>
                 </FormGroup>
-                <div className="custom-control custom-control-alternative custom-checkbox">
-                  <input
-                    className="custom-control-input"
-                    id=" customCheckLogin"
-                    type="checkbox"
-                  />
-                  <label
-                    className="custom-control-label"
-                    htmlFor=" customCheckLogin"
-                  >
-                    <span className="text-muted">Remember me</span>
-                  </label>
-                  <Row className="mt-3">
-                    <Col className="text-right" xs="6">
-                      <a className="text-light" href="/auth/register">
-                        <small>Create new Account</small>
-                      </a>
-                    </Col>
-                  </Row>
-                </div>
+              
+             
+             
                 <div className="text-center">
                   <Button
                     className="my-4"
@@ -205,6 +188,18 @@ class Login extends React.Component {
               </Form>
             </CardBody>
           </Card>
+          <Row className="mt-3">
+          <Col className="text-right" xs="6">
+                      <a className="text-light" href="/auth/register">
+                        <small>               </small>
+                      </a>
+                    </Col>
+                    <Col className="text-right" xs="6">
+                      <a className="text-light" href="/auth/register">
+                        <small>Create new Account</small>
+                      </a>
+                    </Col>
+                  </Row>
         </Col>
       </>
     );

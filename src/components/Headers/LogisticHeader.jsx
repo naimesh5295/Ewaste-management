@@ -11,7 +11,9 @@ class LogisticHeader extends React.Component {
       trucks_len:0,
       truckers_len:0,
       shipment_len:0,
-      logistic_id:localStorage.getItem("user_id")
+      logistic_id:localStorage.getItem("user_id"),
+      truck_id:[],
+      truck_iddata:[]
     }
   }
   componentDidMount() {
@@ -22,16 +24,26 @@ class LogisticHeader extends React.Component {
         console.log("response:",response.data)
         this.setState({
           trucks_len: response.data.truck.length,
-          truckers_len:response.data.trucker.length
+          truckers_len:response.data.trucker.length,
+          truck_id:response.data.truck
         });
       })
       axios
-      .get("http://localhost:3001/api/org.example.mynetwork.Shipment"+(this.state.logistic_id).toString())
+      .get("http://localhost:3001/api/org.example.mynetwork.Shipment")
       .then(response => {
-        console.log("response:",response.data)
+        console.log("shipment:",response.data)
+
+        var e = response.data;
+        var len = e.length
+        console.log("shipment len:",len)
+        //Adding data to array 
+        this.state.truck_id.map(item => {
+            this.state.truck_iddata.push(item.truckID)
+            // console.log(this.state.truck_iddata)
+        })
+
         this.setState({
-          trucks_len: response.data.truck.length,
-          truckers_len:response.data.trucker.length
+            shipment_len:len
         });
       })
       
@@ -61,8 +73,8 @@ class LogisticHeader extends React.Component {
                           </span>
                         </div>
                         <Col className="col-auto">
-                          <div className="icon icon-shape bg-danger text-white rounded-circle shadow">
-                            <i className="fas fa-chart-bar" />
+                          <div className="icon icon-shape bg-success text-white rounded-circle shadow">
+                            <i className="fas fa-truck" />
                           </div>
                         </Col>
                       </Row>
@@ -91,7 +103,7 @@ class LogisticHeader extends React.Component {
                         </div>
                         <Col className="col-auto">
                           <div className="icon icon-shape bg-danger text-white rounded-circle shadow">
-                            <i className="fas fa-chart-bar" />
+                            <i className="fas fa-address-card" />
                           </div>
                         </Col>
                       </Row>
@@ -113,20 +125,53 @@ class LogisticHeader extends React.Component {
                             tag="h5"
                             className="text-uppercase text-muted mb-0"
                           >
-                            Performance
+                            Total Assests
                           </CardTitle>
                           <span className="h2 font-weight-bold mb-0">
-                            49,65%
+                            {this.state.truckers_len + this.state.trucks_len}
                           </span>
                         </div>
                         <Col className="col-auto">
-                          <div className="icon icon-shape bg-info text-white rounded-circle shadow">
-                            <i className="fas fa-percent" />
+                          <div className="icon icon-shape bg-danger text-white rounded-circle shadow">
+                            <i className="fas fa-archive" />
                           </div>
                         </Col>
                       </Row>
-                  
+                      <p className="mt-3 mb-0 text-muted text-sm">
+                       
+                        {/* <span className="text-nowrap">Since last month</span> */}
+                      </p>
                     </CardBody>
+                    
+                  </Card>
+                </Col>
+                <Col lg="6" xl="3">
+                  <Card className="card-stats mb-4 mb-xl-0">
+                    <CardBody>
+                      <Row>
+                        <div className="col">
+                          <CardTitle
+                            tag="h5"
+                            className="text-uppercase text-muted mb-0"
+                          >
+                            Total Shipments
+                          </CardTitle>
+                          <span className="h2 font-weight-bold mb-0">
+                            {this.state.shipment_len}
+                          </span>
+                        </div>
+                        <Col className="col-auto">
+                          <div className="icon icon-shape bg-danger text-white rounded-circle shadow">
+                            <i className="fas fa-archive" />
+                          </div>
+                        </Col>
+                      </Row>
+                      <p className="mt-3 mb-0 text-muted text-sm">
+                       
+                        {/* <span className="text-nowrap">Since last month</span> */}
+                      </p>
+                    </CardBody>
+                    
                   </Card>
                 </Col>
               </Row>

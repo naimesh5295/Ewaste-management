@@ -2,6 +2,7 @@ import React from "react";
 import axios from "axios";
 
 // reactstrap components
+// import {SimpleReactValidator} from "SimpleReactValidator";
 import {
   Button,
   Card,
@@ -33,7 +34,9 @@ class Register extends React.Component {
       usertype: "",
       businessid: "",
       status:0
+      
     };
+  
 
     this.handleSubmitForm = this.handleSubmitForm.bind(this);
     this.handleCity = this.handleCity.bind(this);
@@ -155,7 +158,7 @@ class Register extends React.Component {
       })
       .then(res => {
         console.log(res.data);
-        window.location.href = "http://localhost:3002/auth/login";
+        window.location.href = "http://localhost:3003/auth/login";
 
 
       });
@@ -188,7 +191,7 @@ class Register extends React.Component {
       //  this.alert()
       if (res.status == 200){
          
-      window.location.href = "http://localhost:3002/auth/login";
+      window.location.href = "http://localhost:3003/auth/login";
 
       }
       });
@@ -216,7 +219,7 @@ class Register extends React.Component {
       })
       .then(res => {
         console.log(res.data);
-        window.location.href = "http://localhost:3002/auth/login";
+        window.location.href = "http://localhost:3003/auth/login";
 
       });
   }
@@ -245,6 +248,8 @@ class Register extends React.Component {
                       type="text"
                       value={this.state.businessid}
                       onChange={e => this.handlebusinessid(e)}
+                      vali
+                      required
                     />
                   </InputGroup>
                 </FormGroup>
@@ -261,6 +266,7 @@ class Register extends React.Component {
                       type="text"
                       value={this.state.name}
                       onChange={e => this.handleName(e)}
+                      required
                     />
                   </InputGroup>
                 </FormGroup>
@@ -274,6 +280,7 @@ class Register extends React.Component {
                       type="email"
                       value={this.state.email}
                       onChange={e => this.handleEmail(e)}
+                      required
                     />
                   </InputGroup>
                 </FormGroup>
@@ -287,6 +294,7 @@ class Register extends React.Component {
                       type="password"
                       value={this.state.password}
                       onChange={e => this.handlePassword(e)}
+                      required
                     />
                   </InputGroup>
                 </FormGroup>
@@ -302,10 +310,12 @@ class Register extends React.Component {
                       placeholder="Select User"
                       value={this.state.usertype}
                       onChange={e => this.handleuserType(e)}
+                      required
                     >
                       <option value="RetailStore">RetailStore</option>
                       <option value="Company">Company</option>
                       <option value="Logistics">Logistics</option>
+                      
                     </Input>
                   </InputGroup>
                 </FormGroup>
@@ -316,9 +326,11 @@ class Register extends React.Component {
                     </InputGroupAddon>
                     <Input
                       placeholder="Contact Details"
-                      type="text"
+                      type="tel"
                       value={this.state.contact}
+                      pattern="^\d{10}$"
                       onChange={e => this.handleContact(e)}
+                      required
                     />
                   </InputGroup>
                 </FormGroup>
@@ -333,6 +345,7 @@ City                      </InputGroupText>
                       type="text"
                       value={this.state.city}
                       onChange={e => this.handleCity(e)}
+                      required
                     />
                   </InputGroup>
                 </FormGroup>
@@ -347,6 +360,7 @@ Pincode                      </InputGroupText>
                       type="number"
                       value={this.state.pincode}
                       onChange={e => this.handlePincode(e)}
+                      required
                     />
                   </InputGroup>
                 </FormGroup>
@@ -360,6 +374,7 @@ Pincode                      </InputGroupText>
                       type="text"
                       value={this.state.state}
                       onChange={e => this.handleState(e)}
+                      required
                     />
                   </InputGroup>
                 </FormGroup>
@@ -373,6 +388,7 @@ Pincode                      </InputGroupText>
                       type="text"
                       value={this.state.country}
                       onChange={e => this.handleCountry(e)}
+                      required
                     />
                   </InputGroup>
                 </FormGroup>

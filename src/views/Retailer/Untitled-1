@@ -17,7 +17,39 @@
   "arrivalDate": "2019-04-10T06:37:50.902Z",
   "wasteType": "EWASTE"
 }
+<Container className="mt--7" fluid>
+          {/* Table */}
+          <Row>
+            <div className="col">
+              <Card className="shadow">
+                <CardHeader className="border-5">
+                  <h3 className="mb-0">Trucks</h3>
+                </CardHeader>
+                <Table
+                  className="align-items-center table-flush"
+                  responsive
+                  bordered
+                >
+                  <thead className="thead-light">
+                    <tr>
+                      <th scope="col">Shipment id</th>
+                      <th scope="col">Shipment status</th>
+                      <th scope="col">wastetype</th>
+                    
 
+                      <th scope="col" />
+                    </tr>
+                  </thead>
+
+                  {/* <tbody>{this.renderdata()}</tbody> */}
+                  <tbody>
+                    {/* {this.renderdata()} */}
+                  </tbody>
+                </Table>
+              </Card>
+            </div>
+          </Row>
+        </Container>
 
 
 

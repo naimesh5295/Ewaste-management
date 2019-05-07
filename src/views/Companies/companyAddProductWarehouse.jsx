@@ -27,18 +27,47 @@ class companyAddProductWarehouse extends React.Component {
       productid: "",
       warehouseid: "",
       iscompleted:"",
-      estimatedreward:0
-
+      estimatedreward:0,
+      companyid: localStorage.getItem("user_id"),
+      warehouse_arr:[],
+      warehouse_data:[],
+      date:""
+      
     };
     this.handleAddproduct = this.handleAddproduct.bind(this);
     this.handlewarehouseid = this.handlewarehouseid.bind(this);
     this.handleproduct = this.handleproduct.bind(this);
     this.handleestimatedreward = this.handleestimatedreward.bind(this);
     this.handleiscompleted = this.handleiscompleted.bind(this);
-
+    this.handleDate = this.handleDate.bind(this);
     this.handleSubmitForm = this.handleSubmitForm.bind(this);
   }
+  componentDidMount() {
+    axios
+      .get(
+        "http://localhost:3001/api/org.example.mynetwork.Company/" +
+          this.state.companyid.toString()
+      )
 
+      .then(response => {
+        console.log("response:", response.data);
+        this.setState({
+          warehouse_arr: response.data.wareHouse,
+        });
+        this.state.warehouse_arr.map(item => {
+          this.state.warehouse_data.push(item.wareHouseID);
+          console.log("warehouse data:", this.state.warehouse_data);
+        });
+      
+
+      });
+  }
+  handleDate(event){
+    this.setState({
+      date:event.target.value
+    }
+    )
+  }
   handlewarehouseid(event) {
     this.setState({
       warehouseid: event.target.value
@@ -69,9 +98,10 @@ class companyAddProductWarehouse extends React.Component {
 //   "product": "resource:org.example.mynetwork.Product#7353"
 
   handleAddproduct(){
+    console.log("date:",this.state.date)
     axios.post("http://localhost:3001/api/org.example.mynetwork.AfterCreation",{
         $class: "org.example.mynetwork.AfterCreation",
-        generation:"string",
+        generation:"2019-05-06T16:53:40.525Z",
         estimatedRewardPrice:this.state.estimatedreward,
         isCompleted:this.state.iscompleted,
         product: "resource:org.example.mynetwork.Product#"+(this.state.productid).toString()
@@ -82,6 +112,8 @@ class companyAddProductWarehouse extends React.Component {
 
     axios.post("http://localhost:3001/api/org.example.mynetwork.AddProductToWareHouse",{
         $class: "org.example.mynetwork.AddProductToWareHouse",
+        // product: "resource:org.example.mynetwork.Product#",
+        // wareHouse: "resource:org.example.mynetwork.WareHouse#w001"
         product: "resource:org.example.mynetwork.Product#"+(this.state.productid).toString(),
         wareHouse: "resource:org.example.mynetwork.WareHouse#"+(this.state.warehouseid).toString()
     })
@@ -114,6 +146,19 @@ class companyAddProductWarehouse extends React.Component {
                         type="text"
                         value={this.state.productid}
                         onChange={e => this.handleproduct(e)}
+                      />
+                    </InputGroup>
+                  </FormGroup>
+                  <FormGroup>
+                    <InputGroup className="input-group-alternative">
+                      <InputGroupAddon addonType="prepend">
+                        <InputGroupText>arrivalDate </InputGroupText>
+                      </InputGroupAddon>
+                      <Input
+                        placeholder=""
+                        type="date"
+                        value={this.state.date}
+                        onChange={e => this.handleDate(e)}
                       />
                     </InputGroup>
                   </FormGroup>

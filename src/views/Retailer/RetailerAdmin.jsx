@@ -24,44 +24,10 @@ class RetailerAdmin extends React.Component {
       data: []
     };
     this.handleChangeDelete = this.handleChangeDelete.bind(this);
-    this.handleIssue = this.handleIssue.bind(this);
   }
   handleChangeAdd(event) {}
 
-  handleIssue(event, args) {
-    const identity = {
-      participant: "org.example.mynetwork.RetailStore#"+args,
-      userID: args,
-      options: {}
-    };
 
-    axios
-      .post(
-        "http://localhost:3001/api/system/identities/issue",
-        {
-          participant: "org.example.mynetwork.RetailStore#"+args,
-          userID: args,
-          options: {}
-        },
-        { responseType: "blob" }
-      )
-      .then(cardName => {
-        console.log(cardName);
-
-        const file = new File([cardName], "myCard.card", {
-          type: "application/octet-stream",
-          lastModified: Date.now()
-        });
-
-        const formData = new FormData();
-        formData.append("card", file);
-
-        return axios.post("http://localhost:3000/api/wallet/import", formData, {
-          withCredentials: true,
-          headers: { "Content-Type": "multipart/form-data" }
-        });
-      });
-  }
   handleChangeDelete(event, arg) {
     axios
       .delete(
@@ -117,16 +83,7 @@ class RetailerAdmin extends React.Component {
               </Button>
             </ButtonToolbar>
           </td>
-          <td>
-            <ButtonToolbar>
-              <Button
-                color="success"
-                onClick={e => this.handleIssue(e, item.businessID)}
-              >
-                Issue
-              </Button>
-            </ButtonToolbar>
-          </td>
+    
         </tr>
       );
     });
@@ -156,7 +113,6 @@ class RetailerAdmin extends React.Component {
                       <th scope="col">Retailer Name</th>
                       <th scope="col">Retailer Contact</th>
                       <th scope="col">Delete</th>
-                      <th scope="col">Issue</th>
 
                       <th scope="col" />
                     </tr>

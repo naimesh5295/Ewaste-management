@@ -1,6 +1,5 @@
 import React from "react";
 import axios from "axios";
-import $ from 'jquery';
 
 // reactstrap components
 import {
@@ -59,7 +58,7 @@ class RetailerAddProduct extends React.Component {
 
     this.handlewasteType = this.handlewasteType.bind(this);
   }
-
+ 
   handleretailStore(event) {
     this.setState({
       retailStore: event.target.value
@@ -171,9 +170,9 @@ class RetailerAddProduct extends React.Component {
       <>
         <RetailerHeader />
         <Container className="mt--3" fluid>
-          <Col lg="9" md="8">
+          <Col lg="7" md="3">
             <Card className="bg-secondary shadow border-0">
-              <CardHeader className="bg-transparent pb-5">
+              <CardHeader className="header-body">
                 <div className="text-center text-muted mb-4">
                   <small> Add Product</small>
                 </div>

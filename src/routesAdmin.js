@@ -6,6 +6,7 @@ import RetailerAdmin from "./views/Retailer/RetailerAdmin";
 import LogisticAdmin from "./views/Logistics/LogisticAdmin";
 import CompanyAdmin from "./views/Companies/CompanyAdmin";
 import Issue from "./views/Companies/Issue.jsx"
+import ImportToWallet from "./views/Companies/ImportToWallet.jsx"
 
 import CompanyAdminCompletedProduct from "./views/Companies/CompanyAdminCompletedProduct";
 
@@ -51,6 +52,13 @@ var routes = [
     name:"Issue card",
     icon: "ni ni-delivery-fast text-green",
     component:Issue,
+    layout:"/admin"
+  } ,
+  {
+    path:"/importcard",
+    name:"Import card",
+    icon: "ni ni-delivery-fast text-blue",
+    component:ImportToWallet,
     layout:"/admin"
   } 
 ];

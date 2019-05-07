@@ -3,7 +3,6 @@ import RetailerAddProduct from "views/Retailer/RetailerAddProduct.jsx"
 
 import Profile from "views/examples/Profile.jsx";
 import Icons from "views/examples/Icons.jsx";
-import RetailerDashboard from "views/Retailer/RetailerDashboard.jsx"
 import RetailerAdmin from "views/Retailer/RetailerAdmin.jsx"
 import Retailerproducts from "views/Retailer/Retailerproducts.jsx"
 import RetailerIndex from "views/Retailer/RetailerIndex.jsx"

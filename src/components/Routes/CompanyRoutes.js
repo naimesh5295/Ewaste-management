@@ -4,7 +4,7 @@ import CompanyIndex from "views/Companies/CompanyIndex.jsx";
 import CompanyWarehouse from "views/Companies/CompanyWarehouse.jsx";
 import companyAddProductWarehouse from "views/Companies/companyAddProductWarehouse.jsx";
 import CompanyProfile from "views/Companies/CompanyProfile.jsx";
-
+import companyProvideFund from "views/Companies/companyProvideFund.jsx";
 
 import CompanyDashboard from "views/Companies/CompanyDashboard.jsx";
 var routes = [
@@ -22,7 +22,13 @@ var routes = [
     component: CompanyProfile,
     layout: "/company"
   },
-
+  {
+    path: "/payment",
+    name: "Transfer Fund",
+    icon: "ni ni-tv-2 text-green",
+    component: companyProvideFund,
+    layout: "/company"
+  },
   {
     path: "/addproduct",
     name: "Product Warehouse",

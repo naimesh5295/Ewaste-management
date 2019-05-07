@@ -61,12 +61,7 @@ class AdminNavbar extends React.Component {
               <UncontrolledDropdown nav>
                 <DropdownToggle className="pr-0" nav>
                   <Media className="align-items-center">
-                    <span className="avatar avatar-sm rounded-circle">
-                      <img
-                        alt="..."
-                        src={require("assets/img/theme/team-4-800x800.jpg")}
-                      />
-                    </span>
+                
                     <Media className="ml-2 d-none d-lg-block">
                       <span className="mb-0 text-sm font-weight-bold">
                         Admin
@@ -79,7 +74,7 @@ class AdminNavbar extends React.Component {
                
          
                   <DropdownItem divider />
-                  <DropdownItem href="http://localhost:3002/auth/login" onClick={e => e.handleLogout}>
+                  <DropdownItem href="http://localhost:3003/auth/login" onClick={e => e.handleLogout}>
                     <i className="ni ni-user-run" />
                     <span>Logout</span>
 

@@ -49,10 +49,10 @@ class RetailerProfile extends React.Component {
           email:response.data.businessEmail,
           phone:response.data.businessPhone,
           address:response.data.address,
-          city:this.state.address.city,
-          country:this.state.address.country,
-          postle_code:this.state.address.pincode,
-          state:this.state.address.state,
+          city:response.data.address.city,
+          country:response.data.address.country,
+          postle_code:response.data.address.pincode,
+          state:response.data.address.state,
           userid:response.data.businessID
         });
       })
@@ -82,8 +82,9 @@ class RetailerProfile extends React.Component {
                   <div className="text-center">
                     <h3>
                       {this.state.name}
-                      <span className="font-weight-light">, 27</span>
                     </h3>
+                    <div>RetailStore</div>
+
                     <div className="h5 font-weight-300">
                       <i className="ni location_pin mr-2" />
 {this.state.city},{this.state.state}                    </div>

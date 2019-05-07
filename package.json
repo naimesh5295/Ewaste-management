@@ -22,10 +22,10 @@
   "bugs": {
     "url": "https://github.com/creativetimofficial/argon-dashboard-react/issues"
   },
-  "homepage": "http://localhost:3002/auth/login",
+  "homepage": "http://localhost:3003/auth/login",
   "scripts": {
     "start-js": "react-scripts start",
-    "start": "react-scripts start",
+    "start": " PORT=3003 react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
@@ -45,6 +45,7 @@
   ],
   "dependencies": {
     "@rebass/grid": "^6.0.0",
+    "availity-reactstrap-validation": "^2.5.2",
     "axios": "^0.18.0",
     "bootstrap": "^4.3.1",
     "chart.js": "2.7.3",
@@ -68,13 +69,14 @@
     "react-router-dom": "4.3.1",
     "react-s-alert": "^1.4.1",
     "react-scripts": "2.1.8",
-    "react-select": "^2.4.2",
+    "react-select": "^2.4.3",
     "react-table": "^6.9.2",
     "reactable": "^1.1.0",
     "reactstrap": "7.1.0",
     "rebass": "^3.1.0",
     "reflexbox": "^3.0.1",
-    "sfcookies": "^1.0.2"
+    "sfcookies": "^1.0.2",
+    "simple-react-validator": "^1.0.7"
   },
   "devDependencies": {
     "@types/googlemaps": "3.30.18",

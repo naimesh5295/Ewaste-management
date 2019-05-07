@@ -12,7 +12,7 @@ import {
   ButtonToolbar
 } from "reactstrap";
 // core components
-import Header from "components/Headers/Header.jsx";
+import CompanyHeader from "components/Headers/CompanyHeader.jsx";
 
 class CompanyWarehouse extends React.Component {
   constructor() {
@@ -81,7 +81,7 @@ class CompanyWarehouse extends React.Component {
   render() {
     return (
       <>
-        <Header />
+        <CompanyHeader />
         {/* Page content */}
         <Container className="mt--7" fluid>
           {/* Table */}

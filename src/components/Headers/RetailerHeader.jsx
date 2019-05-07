@@ -34,8 +34,19 @@ class RetailerHeader extends React.Component {
           data: res.data,
           retailer_len:res.data.length
         });
-       
-
+      axios.get("http://localhost:3001/api/queries/getAllCompany")
+      .then(response =>{
+        this.setState({
+          company_len: response.data.length
+        });
+      });
+      axios.get("http://localhost:3001/api/queries/getAllLogistics")
+      .then(response =>{
+        console.log("log",response.data)
+        this.setState({
+          logistic_len: response.data.length
+        });
+      });
         
       })
   }
@@ -43,7 +54,7 @@ class RetailerHeader extends React.Component {
     return (
       <>
         <div className="header bg-gradient-info pb-8 pt-5 pt-md-8">
-          <Container fluid>
+          <Container className="mt--3" fluid>
             <div className="header-body">
               {/* Card stats */}
               <Row>
@@ -57,7 +68,7 @@ class RetailerHeader extends React.Component {
                             tag="h5"
                             className="text-uppercase text-muted mb-0"
                           >
-                           Products
+                           Total Products
                           </CardTitle>
                           <span className="h2 font-weight-bold mb-0">
                           {/* Companies data  */}
@@ -66,7 +77,7 @@ class RetailerHeader extends React.Component {
                         </div>
                         <Col className="col-auto">
                           <div className="icon icon-shape bg-green text-white rounded-circle shadow">
-                            <i className="fas fa-shopping-cart" />
+                            <i className="fas fa-desktop" />
                           </div>
                         </Col>
                       </Row>
@@ -76,8 +87,36 @@ class RetailerHeader extends React.Component {
                     </CardBody>
                   </Card>
                 </Col>
-                
-                    
+                <Col></Col>
+                <Col lg="7" xl="3">
+                <Card className="card-stats mb-4 mb-xl-0">
+                    <CardBody>
+                      <Row>
+                        <div className="col">
+                          <CardTitle
+                            tag="h5"
+                            className="text-uppercase text-muted mb-0"
+                          >
+                             Logistics
+                          </CardTitle>
+                          <span className="h2 font-weight-bold mb-0">
+                          {/* Companies data  */}
+                            {this.state.logistic_len}{" "}
+                          </span>
+                        </div>
+                        <Col className="col-auto">
+                          <div className="icon icon-shape bg-primary text-white rounded-circle shadow">
+                            <i className="fas fa-truck" />
+                          </div>
+                        </Col>
+                      </Row>
+                      <p className="mt-3 mb-0 text-muted text-sm">
+                        {/* <span className="text-nowrap">Since last month</span> */}
+                      </p>
+                    </CardBody>
+                  </Card>
+                </Col>
+                    <Col></Col>
                 <Col lg="7" xl="3">
                   <Card className="card-stats mb-4 mb-xl-0">
                     <CardBody>
@@ -87,11 +126,11 @@ class RetailerHeader extends React.Component {
                             tag="h5"
                             className="text-uppercase text-muted mb-0"
                           >
-                            Customers
+                             Companies
                           </CardTitle>
                           <span className="h2 font-weight-bold mb-0">
                           {/* Companies data  */}
-                            {this.state.customer_len}{" "}
+                            {this.state.company_len}{" "}
                           </span>
                         </div>
                         <Col className="col-auto">

@@ -1,5 +1,6 @@
 import React from "react";
 import axios from "axios";
+import Select from "react-select";
 
 // reactstrap components
 import {
@@ -25,15 +26,46 @@ class LogisticAddTruck extends React.Component {
     super();
     this.state = {
       truckID: "",
-      truckName: "",truckerid:"",
-      logisticsid: localStorage.getItem("user_id")
-
+      truckName: "",
+      truckerid: "",
+      logisticsid: localStorage.getItem("user_id"),
+      trucker_id: [],
+      truck_id: [],
+      truck_data: [],
+      trucker_data: []
     };
     this.handleTruckid = this.handleTruckid.bind(this);
     this.handleTruckName = this.handleTruckName.bind(this);
     this.handleTrucker = this.handleTrucker.bind(this);
     this.handleSubmitForm = this.handleSubmitForm.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+  }
+  componentDidMount() {
+    axios
+      .get(
+        "http://localhost:3001/api/org.example.mynetwork.Logistics/" +
+          this.state.logisticsid.toString()
+      )
+
+      .then(response => {
+        console.log("response:", response.data);
+        this.setState({
+          trucker_id: response.data.trucker,
+          truck_id: response.data.truck
+        });
+        this.state.truck_id.map(item => {
+          this.state.truck_data.push(item.truckID);
+          console.log("truck data:", this.state.truck_data);
+        });
+
+        this.state.trucker_id.map(item => {
+          this.state.trucker_data.push({
+            label: item.personID,
+            value: item.personID
+          });
+          console.log("trucker_data:", this.state.trucker_data);
+        });
+      });
   }
 
   handleTruckid(event) {
@@ -58,14 +90,13 @@ class LogisticAddTruck extends React.Component {
       truckerid: event.target.value
     });
   }
-  
 
-renderdata(res){
-  this.state.trucker.map(item => {
-    this.state.trucker_arr.push(item.personID)
-  })
-console.log("rednerdata",this.state.trucker_arr)
-}
+  renderdata(res) {
+    this.state.trucker.map(item => {
+      this.state.trucker_arr.push(item.personID);
+    });
+    console.log("rednerdata", this.state.trucker_arr);
+  }
 
   handleSubmitForm(event) {
     event.preventDefault();
@@ -73,32 +104,45 @@ console.log("rednerdata",this.state.trucker_arr)
   handleSubmit() {
     console.log(this.state);
     axios
-    .post("http://localhost:3001/api/org.example.mynetwork.Truck", {
-      $class: "org.example.mynetwork.Truck",
-      truckID: this.state.truckID,
-      truckName:this.state.truckName,
-      trucker:"resource:org.example.mynetwork.Trucker#"+this.state.truckerid
-  
-    })
-    .then(res => {
-      console.log(res.data);
-      this.handleAddtruck()
-    });
-
-
+      .post("http://localhost:3001/api/org.example.mynetwork.Truck", {
+        $class: "org.example.mynetwork.Truck",
+        truckID: this.state.truckID,
+        truckName: this.state.truckName,
+        trucker:
+          "resource:org.example.mynetwork.Trucker#" + this.state.truckerid
+      })
+      .then(res => {
+        console.log(res.data);
+        this.handleAddtruck();
+      });
   }
 
-  handleAddtruck(){
-    axios.post("http://localhost:3001/api/org.example.mynetwork.AddTruck",{
-      $class: "org.example.mynetwork.AddTruck",
-      truck: this.state.truckID,
-      logistics: this.state.logisticsid
-  
-    })
-    .then(res=>{
-      console.log(res.data)
-    })
+  handleAddtruck() {
+    axios
+      .post("http://localhost:3001/api/org.example.mynetwork.AddTruck", {
+        $class: "org.example.mynetwork.AddTruck",
+        truck: this.state.truckID,
+        logistics: this.state.logisticsid
+      })
+      .then(res => {
+        console.log(res.data);
+      });
   }
+  customStyles = {
+     option: (provided, state) => ({
+      ...provided,
+      padding: 20    }),
+    control: () => ({
+      // none of react-select's styles are passed to <Control />
+      width: 200
+    })
+    // singleValue: (provided, state) => {
+    //   const opacity = state.isDisabled ? 0.5 : 1;
+    //   const transition = "opacity 300ms";
+
+    //   return { ...provided, opacity, transition };
+    // }
+  };
 
   render() {
     return (
@@ -132,6 +176,7 @@ console.log("rednerdata",this.state.trucker_arr)
                       <InputGroupAddon addonType="prepend">
                         <InputGroupText>Truck Name</InputGroupText>
                       </InputGroupAddon>
+
                       <Input
                         placeholder=""
                         type="text"
@@ -145,15 +190,29 @@ console.log("rednerdata",this.state.trucker_arr)
                       <InputGroupAddon addonType="prepend">
                         <InputGroupText>Trucker id</InputGroupText>
                       </InputGroupAddon>
-                      <Input
-                        placeholder=""
-                        type="text"
+
+                      {/* <Select
                         value={this.state.truckerid}
                         onChange={e => this.handleTruckerid(e)}
+                        options={this.state.trucker_data.map(t => ({
+                          value: t,
+                          label: t
+                        }))}
+                      /> */}
+                      {/* <Input
+                      type="select"
+                      value={this.state.truckerid}
+                      onChange={e => this.handleTruckerid(e)}
+                      >
+                     {this.state.truck_data.map(user => <option value={user.label}>{user.value}</option>)}
+
+                      </Input> */}
+                      <Select
+                        styles={this.customStyles}
+                        options={this.state.trucker_data}
                       />
                     </InputGroup>
                   </FormGroup>
-               
 
                   <div className="text-center">
                     <Button

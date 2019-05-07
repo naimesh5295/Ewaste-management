@@ -36,7 +36,11 @@ class Index extends React.Component {
   state = {
     activeNav: 1,
     chartExample1Data: "data1",
-    data:[],
+    data:[],     
+    retailer_len: 0,
+    logistic_len: 0,
+    company_len: 0,
+    customer_len:0,
     historian_len:0
   };
   toggleNavs = (e, index) => {
@@ -59,11 +63,41 @@ class Index extends React.Component {
     }
   }
   componentDidMount() {
+    var urls = [
+      "http://localhost:3001/api/queries/getAllCompany",
+      "http://localhost:3001/api/queries/getAllRetailStore",
+      "http://localhost:3001/api/queries/getAllLogistics",
+      "http://localhost:3001/api/queries/getAllCustomer"
+
+    ];
+    axios.get(urls[0]).then(response => {
+      this.setState({
+        company_len: response.data.length
+      });
+    });
+    axios.get(urls[1]).then(response => {
+      this.setState({
+        retailer_len: response.data.length
+      });
+    });
+    axios.get(urls[2]).then(response => {
+      this.setState({
+        logistic_len: response.data.length
+      });
+    });
+    axios.get(urls[3]).then(response => {
+      this.setState({
+        customer_len: response.data.length
+      });
+    });
+  }
+  componentDidMount() {
+    
     this.setState({ loading: true });
     axios
       .get("http://localhost:3001/api/system/historian")
       .then(response => {
-        console.log(response.data)
+        console.log(response.data.length)
         this.setState({
           data: response.data,
           historian_len:response.data.length
@@ -93,38 +127,9 @@ class Index extends React.Component {
         <Header />
         {/* Page content */}
         <Container className="mt--7" fluid>
-          <Row>
-            <Col className="mb-5 mb-xl-0" xl="8">
-              <Card className="bg-gradient-default shadow">
-                <CardHeader className="bg-transparent">
-                  <Row className="align-items-center">
-                    <div className="col">
-                      <h6 className="text-uppercase text-light ls-1 mb-1">
-                        Overview
-                      </h6>
-                      <h2 className="text-white mb-0">Total Users</h2>
-                    </div>
-                    <div className="col">
-                   
-                    </div>
-                  </Row>
-                </CardHeader>
-                <CardBody>
-                  {/* Chart */}
-                  <div className="chart">
-                    <Line
-                      data={chartExample1[this.state.chartExample1Data]}
-                      options={chartExample1.options}
-                      getDatasetAtEvent={e => console.log(e)}
-                    />
-                  </div>
-                </CardBody>
-              </Card>
-            </Col>
-         
-          </Row>
+      
           <Row className="mt-5">
-            <Col className="mb-5 mb-xl-0" xl="8">
+            <Col className="mb-5 mb-xl-0" xl="12">
               <Card className="shadow">
                 <CardHeader className="border-0">
                   <Row className="align-items-center">
@@ -157,114 +162,7 @@ class Index extends React.Component {
                 </Table>
               </Card>
             </Col>
-            <Col xl="4">
-              <Card className="shadow">
-                <CardHeader className="border-0">
-                  <Row className="align-items-center">
-                    <div className="col">
-                      <h3 className="mb-0">Social traffic</h3>
-                    </div>
-                    <div className="col text-right">
-                      <Button
-                        color="primary"
-                        href="#pablo"
-                        onClick={e => e.preventDefault()}
-                        size="sm"
-                      >
-                        See all
-                      </Button>
-                    </div>
-                  </Row>
-                </CardHeader>
-                <Table className="align-items-center table-flush" responsive>
-                  <thead className="thead-light">
-                    <tr>
-                      <th scope="col">Referral</th>
-                      <th scope="col">Visitors</th>
-                      <th scope="col" />
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <th scope="row">Facebook</th>
-                      <td>1,480</td>
-                      <td>
-                        <div className="d-flex align-items-center">
-                          <span className="mr-2">60%</span>
-                          <div>
-                            <Progress
-                              max="100"
-                              value="60"
-                              barClassName="bg-gradient-danger"
-                            />
-                          </div>
-                        </div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <th scope="row">Facebook</th>
-                      <td>5,480</td>
-                      <td>
-                        <div className="d-flex align-items-center">
-                          <span className="mr-2">70%</span>
-                          <div>
-                            <Progress
-                              max="100"
-                              value="70"
-                              barClassName="bg-gradient-success"
-                            />
-                          </div>
-                        </div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <th scope="row">Google</th>
-                      <td>4,807</td>
-                      <td>
-                        <div className="d-flex align-items-center">
-                          <span className="mr-2">80%</span>
-                          <div>
-                            <Progress max="100" value="80" />
-                          </div>
-                        </div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <th scope="row">Instagram</th>
-                      <td>3,678</td>
-                      <td>
-                        <div className="d-flex align-items-center">
-                          <span className="mr-2">75%</span>
-                          <div>
-                            <Progress
-                              max="100"
-                              value="75"
-                              barClassName="bg-gradient-info"
-                            />
-                          </div>
-                        </div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <th scope="row">twitter</th>
-                      <td>2,645</td>
-                      <td>
-                        <div className="d-flex align-items-center">
-                          <span className="mr-2">30%</span>
-                          <div>
-                            <Progress
-                              max="100"
-                              value="30"
-                              barClassName="bg-gradient-warning"
-                            />
-                          </div>
-                        </div>
-                      </td>
-                    </tr>
-                  </tbody>
-                </Table>
-              </Card>
-            </Col>
+         
           </Row>
         </Container>
       </>

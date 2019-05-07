@@ -108,26 +108,37 @@ class CompanyCreateWarehouse extends React.Component {
       })
       .then(res => {
         console.log(res.data);
+        axios
+        .post("http://localhost:3001/api/org.example.mynetwork.AddWareHouse", {
+          $class: "org.example.mynetwork.AddWareHouse",
+          wareHouse: "resource:org.example.mynetwork.WareHouse#"+this.state.wareHouseID,
+          company: "resource:org.example.mynetwork.Company#"+this.state.company_id
+        })
+        .then(res => {
+          console.log(res.data);
+        });
       });
-    axios
-      .post("http://localhost:3001/api/org.example.mynetwork.AddWareHouse", {
-        $class: "org.example.mynetwork.AddWareHouse",
-        wareHouse: this.state.wareHouseID,
-        company: this.state.company_id
-      })
-      .then(res => {
-        console.log(res.data);
-      });
+      // resource:org.example.mynetwork.WareHouse#5783
+    
+    // axios
+    //   .post("http://localhost:3001/api/org.example.mynetwork.AddWareHouse", {
+    //     $class: "org.example.mynetwork.AddWareHouse",
+    //     wareHouse: "resource:org.example.mynetwork.WareHouse#"+this.state.wareHouseID,
+    //     company: "resource:org.example.mynetwork.Company#"+this.state.company_id
+    //   })
+    //   .then(res => {
+    //     console.log(res.data);
+    //   });
   }
   render() {
     return (
       <>
-        <Header />>
+        <Header />
         <Col lg="9" md="8">
           <Card className="bg-secondary shadow border-0">
             <CardHeader className="bg-transparent pb-5">
               <div className="text-center text-muted mb-4">
-                <small> Add Warehouse</small>
+                <h1> Add Warehouse</h1>
               </div>
             </CardHeader>
             <CardBody className="px-lg-5 py-lg-5">

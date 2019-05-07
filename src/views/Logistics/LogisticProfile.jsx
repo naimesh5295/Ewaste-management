@@ -39,16 +39,16 @@ class LogisticProfile extends React.Component {
       .get("http://localhost:3001/api/org.example.mynetwork.Logistics/"+(this.state.logistic_id).toString())
       .then(response => {
         console.log("response:",response.data)
-        console.log(this.state.address.data)
+        console.log(response.data.address)
         this.setState({
           name:response.data.businessName,
           email:response.data.businessEmail,
           phone:response.data.businessPhone,
           address:response.data.address,
-          city:this.state.address.city,
-          country:this.state.address.country,
-          postle_code:this.state.address.pincode,
-          state:this.state.address.state,
+          city:response.data.address.city,
+          country:response.data.address.country,
+          postle_code:response.data.address.pincode,
+          state:response.data.address.state,
           userid:response.data.businessID
         });
       })
@@ -78,12 +78,13 @@ class LogisticProfile extends React.Component {
                   <div className="text-center">
                     <h3>
                       {this.state.name}
-                      <span className="font-weight-light">, 27</span>
+                      <span className="font-weight-light"></span>
                     </h3>
+                    <div>Logistic</div>
+
                     <div className="h5 font-weight-300">
                       <i className="ni location_pin mr-2" />
 {this.state.city},{this.state.state}                    </div>
-                    
                 
                   </div>
                 </CardBody>
